@@ -3,9 +3,9 @@ import type { FC } from 'react';
 import { useState } from "react";
 import { createUsers, readUsers } from "../localStorage";
 
-interface CreateProps {}
+interface UpdateProps {}
 
-const Create: FC<CreateProps> = ({}) => {
+const Update: FC<UpdateProps> = ({}) => {
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -64,10 +64,10 @@ const Create: FC<CreateProps> = ({}) => {
         disabled={ disable }
         onClick={() => saveAllUsers()}
       >
-        Register
+        Update
       </button>
     </form>
   );
 }
 
-export default Create;
+export default Update;

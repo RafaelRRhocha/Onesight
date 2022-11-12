@@ -1,0 +1,35 @@
+form {
+  background-color: #27272a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 10%;
+  padding: 30px;
+  border-radius: 10px;
+}
+form input {
+  padding: 10px;
+  border-radius: 6px;
+  width: 300px;
+}
+form input:focus {
+  box-shadow: 0 0 0 0;
+  outline: 0;
+}
+form button {
+  padding: 12px;
+  text-transform: uppercase;
+  background-color: #36d399;
+  color: black;
+  font-weight: bolder;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+form button:disabled {
+  opacity: 0.5;
+}/*# sourceMappingURL=index.css.map */
