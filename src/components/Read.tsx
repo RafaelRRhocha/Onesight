@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { NotePencil } from 'phosphor-react';
 import { FC, useEffect, useState } from 'react';
+import IUser from '../interfaces';
 import { deleteUsers, readUsers } from '../localStorage';
 import Delete from './Delete';
 
@@ -18,15 +19,15 @@ const Read: FC<ReadProps> = ({}) => {
 
   const removeUsers = (email: string) => {
     deleteUsers(email);
-    setUsers((old) => old.filter((item) => item.email !== email));
+    setUsers((old) => old.filter((user: IUser) => user.email !== email));
   };
 
   return (
-    <div className="wrapper">
+    <div className="container">
       <Link href="/create">
         <button
           type="button"
-          className="newUser"
+          className="newUserBtn"
         >
           New User
         </button>
@@ -42,14 +43,14 @@ const Read: FC<ReadProps> = ({}) => {
                 </tr>
               </thead>
               <tbody>
-                {users?.map(({ name, email, date }: { name: string, email: string, date: string }, id) => (
+                {users?.map(({ name, email, date }: IUser, id: number) => (
                   <tr key={ email }>
                     <td>{ name }</td>
                     <td>{ email }</td>
                     <td>{ date }</td>
                     <td>
                       <NotePencil
-                        size={25}
+                        size={ 25 }
                         color="#36d399"
                         style={{ cursor: 'pointer', marginLeft: 10 }}
                         onClick={() => router.push(`/update/${id}`)}
@@ -61,7 +62,7 @@ const Read: FC<ReadProps> = ({}) => {
               </tbody>
             </table>
           ) : (
-            <p>Nenhum Usuário Cadastrado</p>
+            <p>No Registered User</p>
           ) }
     </div>
   );

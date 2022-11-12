@@ -1,10 +1,10 @@
 form {
-  background-color: #27272a;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  background-color: #27272a;
   width: 800px;
   margin: 0 auto;
   margin-top: 10%;

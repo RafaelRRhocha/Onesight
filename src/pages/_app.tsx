@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Onesight</title>
+        <title>Onesight Test</title>
       </Head>
       <Component {...pageProps} />
     </>

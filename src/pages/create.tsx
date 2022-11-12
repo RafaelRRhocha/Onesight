@@ -5,9 +5,7 @@ interface createProps {}
 
 const create: FC<createProps> = ({}) => {
   return (
-    <>
-      <Create />
-    </>
+    <Create />
   );
 }
 

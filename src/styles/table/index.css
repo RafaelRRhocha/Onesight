@@ -1,17 +1,18 @@
-.wrapper {
+.container {
   background-color: #27272a;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 20px;
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
   margin-top: 10%;
   padding: 30px;
   border-radius: 10px;
 }
 
-.newUser {
+.newUserBtn {
   padding: 12px;
   text-transform: uppercase;
   background-color: #00A6FF;

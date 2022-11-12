@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useState } from "react";
+import IUser from "../interfaces";
 import { createUsers, readUsers } from "../localStorage";
 
 interface CreateProps {}
@@ -26,13 +27,15 @@ const Create: FC<CreateProps> = ({}) => {
 
   const saveAllUsers = () => {
     const date = new Date().toLocaleDateString('pt-BR');
+
     const dbUsers = readUsers();
-    const isNotValidUser = dbUsers.some((e: any) => email === e?.email || name === e?.name);
+    const isNotValidUser = dbUsers?.some((user: IUser) => email === user.email || name === user.name);
 
     if(isNotValidUser) {
-      alert('Email ou Usuário Já Cadastrado!');
+      alert('Email or User Already Registered!');
       return setDisable(true);
     }
+
     createUsers({ name, email, date });
     setEmail('');
     setName('');
@@ -58,13 +61,16 @@ const Create: FC<CreateProps> = ({}) => {
         onChange={verifyInputEmail}
         autoComplete="off"
       />
-      <button
-        type="button"
-        disabled={ disable }
-        onClick={() => saveAllUsers()}
-      >
-        Register
-      </button>
+      <div>
+        <button
+          type="button"
+          disabled={ disable }
+          onClick={() => saveAllUsers()}
+          className="updateBtn"
+        >
+          Register User
+        </button>
+      </div>
     </form>
   );
 }
