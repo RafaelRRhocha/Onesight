@@ -25,8 +25,7 @@ const Create: FC<CreateProps> = ({}) => {
   };
 
   const saveAllUsers = () => {
-    const timeElapsed = Date.now();
-    const date = new Date(timeElapsed).toLocaleDateString();
+    const date = new Date().toLocaleDateString('pt-BR');
     const dbUsers = readUsers();
     const isNotValidUser = dbUsers.some((e: any) => email === e?.email || name === e?.name);
 

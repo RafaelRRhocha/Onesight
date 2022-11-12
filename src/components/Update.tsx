@@ -1,15 +1,25 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
-import { useState } from "react";
-import { createUsers, readUsers } from "../localStorage";
+import { useEffect, useState } from "react";
+import { readUsers, updateUsers } from "../localStorage";
 
-interface UpdateProps {}
+interface UpdateProps {
+  id: string
+}
 
-const Update: FC<UpdateProps> = ({}) => {
+const Update: FC<UpdateProps> = ({ id }) => {
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [disable, setDisable] = useState(true);
+
+  useEffect(() => {
+    const dbUser = readUsers()[id];
+    setName(dbUser.name);
+    setEmail(dbUser.email);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const verifyInputName = ({ target: { value } }) => {
     setDisable(true);
@@ -25,16 +35,17 @@ const Update: FC<UpdateProps> = ({}) => {
   };
 
   const saveAllUsers = () => {
-    const timeElapsed = Date.now();
-    const date = new Date(timeElapsed).toLocaleDateString();
     const dbUsers = readUsers();
-    const isNotValidUser = dbUsers.some((e: any) => email === e?.email || name === e?.name);
+    let isNotValidUser = dbUsers.some((e: any) => email === e?.email || name === e?.name);
 
+    if(dbUsers[id].email === email || dbUsers[id].name === name) {
+      isNotValidUser = false
+    }
     if(isNotValidUser) {
       alert('Email ou Usuário Já Cadastrado!');
       return setDisable(true);
     }
-    createUsers({ name, email, date });
+    updateUsers({ name, email, date: dbUsers[id].date }, id);
     setEmail('');
     setName('');
     setDisable(true);
@@ -59,13 +70,24 @@ const Update: FC<UpdateProps> = ({}) => {
         onChange={verifyInputEmail}
         autoComplete="off"
       />
-      <button
-        type="button"
-        disabled={ disable }
-        onClick={() => saveAllUsers()}
-      >
-        Update
-      </button>
+      <div>
+        <Link href={'/'}>
+          <button
+            type="button"
+            className="backToHomeBtn"
+          >
+            Back To Home
+          </button>
+        </Link>
+        <button
+          type="button"
+          className="updateBtn"
+          disabled={ disable }
+          onClick={() => saveAllUsers()}
+        >
+          Update
+        </button>
+      </div>
     </form>
   );
 }

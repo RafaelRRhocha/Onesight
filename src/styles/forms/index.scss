@@ -6,6 +6,17 @@
   gap: $gap
 }
 
+@mixin button($color) {
+  padding: 12px;
+  text-transform: uppercase;
+  background-color: $color;
+  color: black;
+  font-weight: bolder;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 form {
   background-color: #27272a;
   @include flexCenter(column, 20px);
@@ -26,15 +37,16 @@ form {
     outline: 0;
   }
 
-  button {
-    padding: 12px;
-    text-transform: uppercase;
-    background-color: #36d399;
-    color: black;
-    font-weight: bolder;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+  div {
+    @include flexCenter(row, 20px);
+
+    .backToHomeBtn {
+      @include button(#EE005F)
+    }
+
+    .updateBtn {
+      @include button(#36d399)
+    }
   }
 
   button:disabled {
